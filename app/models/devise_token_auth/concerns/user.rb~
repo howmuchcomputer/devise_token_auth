@@ -10,17 +10,6 @@ module DeviseTokenAuth::Concerns::User
       self.devise_modules.delete(:omniauthable)
     end
 
-		field :provider, type: String
-    field :uid, type: String
-
-    field :encrypted_password, type: String, default: ""
-
-    field :reset_password_token, type: String
-    field :reset_password_sent_at, type: DateTime
-
-    field :remember_created_at, type: DateTime
-
-    field :tokens, type: Hash, default: {}
 
     validates :email, presence: true, email: true, if: Proc.new { |u| u.provider == 'email' }
     validates_presence_of :uid, if: Proc.new { |u| u.provider != 'email' }
